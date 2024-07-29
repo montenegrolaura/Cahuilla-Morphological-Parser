@@ -53,35 +53,35 @@ class MysqlRepository(Repository):
 
 
     def load_morphemes(self) -> list[Morpheme]:
-        sql = 'SELECT canonical_form, gloss, pos FROM morpheme'
+        sql = 'SELECT canonicalForm, gloss, pos FROM morpheme'
         self.cursor.execute(sql)
-        entries = [{'canonical_form': canonical_form,
+        entries = [{'canonicalForm': canonicalForm,
                     'gloss': gloss,
                     'pos': pos,
-                    } for (canonical_form, gloss, pos) in self.cursor]
-        morphemes = [Morpheme(entry['canonical_form'], entry['gloss'], self.map_pos(entry['pos'])) for entry in entries]
+                    } for (canonicalForm, gloss, pos) in self.cursor]
+        morphemes = [Morpheme(entry['canonicalForm'], entry['gloss'], self.map_pos(entry['pos'])) for entry in entries]
         return morphemes
 
 
     def load_rootVerbs(self) -> list[RootVerb]:
-        sql = 'SELECT m.canonical_form, m.gloss, m.pos, rv.transitivity FROM morpheme m JOIN rootVerb rv ON m.id = rv.id'
+        sql = 'SELECT m.canonicalForm, m.gloss, m.pos, rv.transitivity FROM morpheme m JOIN rootVerb rv ON m.id = rv.id'
         self.cursor.execute(sql)
-        entries = [{'canonical_form': canonical_form,
+        entries = [{'canonicalForm': canonicalForm,
                     'gloss': gloss,
                     'pos': pos,
                     'transitivity': Transitivity
-                    } for (canonical_form, gloss, pos, Transitivity) in self.cursor]
-        rootVerbs = [RootVerb(entry['canonical_form'], entry['gloss'], self.map_pos(entry['pos']), self.map_transitivity(entry['transitivity'])) for entry in entries]
+                    } for (canonicalForm, gloss, pos, Transitivity) in self.cursor]
+        rootVerbs = [RootVerb(entry['canonicalForm'], entry['gloss'], self.map_pos(entry['pos']), self.map_transitivity(entry['transitivity'])) for entry in entries]
         return rootVerbs
 
 
     def load_nominalizers(self) -> list[Nominalizer]:
-        sql = 'SELECT m.canonical_form, m.gloss, m.pos, n.class1Relationship FROM morpheme m JOIN nominalizer n ON m.id = n.id'
+        sql = 'SELECT m.canonicalForm, m.gloss, m.pos, n.class1Relationship FROM morpheme m JOIN nominalizer n ON m.id = n.id'
         self.cursor.execute(sql)
-        entries = [{'canonical_form': canonical_form,
+        entries = [{'canonicalForm': canonicalForm,
                     'gloss': gloss,
                     'pos': pos,
                     'class1Relationship': Class1Relationship
-                    } for (canonical_form, gloss, pos, Class1Relationship) in self.cursor]
-        nominalizers = [Nominalizer(entry['canonical_form'], entry['gloss'], self.map_pos(entry['pos']), self.map_nominalizer(entry['class1Relationship'])) for entry in entries]
+                    } for (canonicalForm, gloss, pos, Class1Relationship) in self.cursor]
+        nominalizers = [Nominalizer(entry['canonicalForm'], entry['gloss'], self.map_pos(entry['pos']), self.map_nominalizer(entry['class1Relationship'])) for entry in entries]
         return nominalizers
