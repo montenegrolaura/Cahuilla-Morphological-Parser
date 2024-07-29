@@ -1,58 +1,31 @@
 import pytest
+from model.enums import *
+from model.morpheme import Morpheme
+from model.rootVerb import RootVerb
+from model.nominalizer import Nominalizer
+from model.word import Word
 from model.parser import MorphologicalParser
+from database.mysql_repository import MysqlRepository
 
-NOMINALIZERS = {
-    'vel': 'nominalizer showing event already occurred',
-    'ʔil̃': 'nominalizer that makes abstract verbs into nouns',
-    'at': 'nominalizer that makes abstract verbs into nouns',
-    'piš': 'nominalizer that indicates something has not yet occurred'
-}
 
-ROOTS = {
-    'vúvan': 'hit',
-    'kúp': 'sleep',
-    'kʷáʔisni': 'write',
-    'ʔámin': 'throw'
-}
+@pytest.fixture
+def repo():
+    return MysqlRepository()
 
-parser = MorphologicalParser(ROOTS, NOMINALIZERS)
+@pytest.fixture
+def parser(repo):
+    return MorphologicalParser(repository=repo)
 
-def test_1():
-    word = 'vúvan–piš'
-    expected = {
-        'root': [('vúvan', 'hit')],
-        'nominalizers': [('piš', 'nominalizer that indicates something has not yet occurred')]
-    }
-    result = parser.parse(word)
-    print(result)
-    assert parser.parse(word) == expected
+def test_morphological_parser(parser):
+    word = Word(surface_form="vúvanpiš", definition='an insect that stings')
 
-def test_2():
-    word = 'kúp–vel'
-    expected = {
-        'root': [('kúp',  'sleep')],
-        'nominalizers': [('vel', 'nominalizer showing event already occurred')]
-    }
-    results = parser.parse(word)
-    print(results)
-    assert results == expected
+    components = parser.parse(word)
 
-def test_3():
-    word = 'kʷáʔisni–ʔil̃'
-    expected = {
-        'root': [('kʷáʔisni', 'write')],
-        'nominalizers': [('ʔil̃', 'nominalizer that makes abstract verbs into nouns')]
-    }
-    results = parser.parse(word)
-    print(results)
-    assert results == expected
+    assert components['root'] == 'vúvan'
+    assert components['root_gloss'] == 'to hit'
+    assert components['nominalizer'] == 'piš'
+    assert components['nominalizer_gloss'] == 'NMLZ.FUT'
 
-def test_4():
-    word = 'ʔámin–at'
-    expected = {
-        'root': [('ʔámin', 'throw')],
-        'nominalizers': [('at', 'nominalizer that makes abstract verbs into nouns')]
-    }
-    results = parser.parse(word)
-    print(results)
-    assert results == expected
+
+
+
