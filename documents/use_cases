@@ -1,0 +1,4 @@
+Use Case #1:
+Take in a Class 1 Derivational noun in Cahuilla and return the definition along with its morphological components and their glosses.
+Input: a noun
+Output: the definition, the root verb and its gloss, and any nominalizers and their glosses
