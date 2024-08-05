@@ -25,6 +25,13 @@ CREATE TABLE nominalizer (
     FOREIGN KEY (id) REFERENCES morpheme(id)
 );
 
+CREATE TABLE definition (
+    id INT NOT NULL AUTO_INCREMENT,
+    word_surface VARCHAR(200) NOT NULL,
+    definition VARCHAR(200),
+    PRIMARY KEY (id)
+);
+
 
 INSERT INTO morpheme
     (canonicalForm, gloss, pos)
@@ -71,5 +78,21 @@ VALUES
     ((SELECT id FROM morpheme WHERE canonicalForm = 'piš'), 'event not yet occurred'),
     ((SELECT id FROM morpheme WHERE canonicalForm = 'vel'), 'already occurring or occurred'),
     ((SELECT id FROM morpheme WHERE canonicalForm = 'val'), 'location or place')
+;
+
+INSERT INTO definition
+    (word_surface, definition)
+VALUES
+    ('ʔáminat', 'the throwing or the orphan'),
+    ('kʷáʔisniat', 'the writing'),
+    ('pívat', 'tobacco'),
+    ('kʷáʔisniʔil̃', 'the writing'),
+    ('kúyil̃', 'the burial'),
+    ('ʔásniʔil̃', 'the bathing, the bath'),
+    ('vúvanpiš', 'an insect that stings'),
+    ('kúpvel', 'the bed'),
+    ('yúmuvel', 'the hat'),
+    ('qáwivel', 'handle'),
+    ('čeŋenval', 'dancing place')
 ;
 

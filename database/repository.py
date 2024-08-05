@@ -17,3 +17,7 @@ class Repository(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def load_nominalizers(self) -> list[Nominalizer]:
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def load_definitions(self, word_surface: str) -> str:
+        raise NotImplementedError

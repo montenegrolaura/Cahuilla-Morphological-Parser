@@ -1,4 +1,4 @@
-from database.repository import Repository
+from .repository import Repository
 import mysql.connector
 from mysql.connector import Error
 from model.enums import PartsOfSpeech, Transitivity, Class1Relationship
@@ -85,3 +85,29 @@ class MysqlRepository(Repository):
                     } for (canonicalForm, gloss, pos, Class1Relationship) in self.cursor]
         nominalizers = [Nominalizer(entry['canonicalForm'], entry['gloss'], self.map_pos(entry['pos']), self.map_nominalizer(entry['class1Relationship'])) for entry in entries]
         return nominalizers
+
+    def load_definitions(self, word_surface: str) -> str:
+        sql = 'SELECT definition FROM definition WHERE word_surface = %s'
+        self.cursor.execute(sql, (word_surface,))
+        result = self.cursor.fetchone()
+        if result:
+            return result[0]
+        return None
+
+
+
+# Debugging MySQLRepository to ensure data is loaded correctly
+if __name__ == "__main__":
+    repo = MysqlRepository()
+    roots = repo.load_rootVerbs()
+    print("Loaded roots:")
+    for root in roots:
+        print(f"Root: {root.canonical_form}, Gloss: {root.gloss}, Transitivity: {root.transitivity}")
+
+    nominalizers = repo.load_nominalizers()
+    print("Loaded nominalizers:")
+    for nominalizer in nominalizers:
+        print(f"Nominalizer: {nominalizer.canonical_form}, Gloss: {nominalizer.gloss}")
+
+    definition = repo.load_definitions("vúvanpiš")
+    print(f"Definition for 'vúvanpiš': {definition}")
