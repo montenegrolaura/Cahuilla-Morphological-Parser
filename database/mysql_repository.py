@@ -47,7 +47,7 @@ class MysqlRepository(Repository):
     def map_nominalizer(self, relationship: str) -> Class1Relationship:
         nominalizer_switcher = {'verbal abstract noun': Class1Relationship.VERBAL_ABSTRACT_NOUN,
                                 'event not yet occurred': Class1Relationship.EVENT_NOT_YET_OCCURRED,
-                                'already occurred or occurring': Class1Relationship.ALREADY_OCCURRING_OR_OCCURRED,
+                                'already occurring or occurred': Class1Relationship.ALREADY_OCCURRING_OR_OCCURRED,
                                 'location or place': Class1Relationship.LOCATION_OR_PLACE}
         return nominalizer_switcher.get(relationship, None)
 
@@ -69,7 +69,7 @@ class MysqlRepository(Repository):
         entries = [{'canonicalForm': canonicalForm,
                     'gloss': gloss,
                     'pos': pos,
-                    'transitivity': Transitivity
+                    'transitivity': Transitivity,
                     } for (canonicalForm, gloss, pos, Transitivity) in self.cursor]
         rootVerbs = [RootVerb(entry['canonicalForm'], entry['gloss'], self.map_pos(entry['pos']), self.map_transitivity(entry['transitivity'])) for entry in entries]
         return rootVerbs
