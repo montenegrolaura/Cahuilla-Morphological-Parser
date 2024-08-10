@@ -35,9 +35,16 @@ Run the following in the command line:
 ### 3. Run application
 To run the application, run the following line in your terminal: ```python3 -m web.app```
 
-### 4. Send curl request
+### 4. Send POST request
+
+This can be done one of two ways: through a curl command in the terminal or through your browser.
+
+#### Option 1: Curl command
 Once the application is up and running, in a new terminal run this curl command:
 ```curl -X POST http://localhost:5000/parse -H "Content-Type: application/json" -d '{"word": "kʷáʔisniʔil̃"}'```
 
 The response will give you a json of the morphological components, as seen above:
 {"definition": "the writing", "root": "kʷáʔisni", "root_gloss": "to write", "transitivity": "TRANSITIVE", "nominalizer": "ʔil̃", "nominalizer_gloss": "NMLZ.ABST", "class1relationship": "VERBAL_ABSTRACT_NOUN"}
+
+#### Option 2: Browser
+Open your web browser and navigate to localhost:5000. Type in the word you want to parse and hit the 'submit' button.

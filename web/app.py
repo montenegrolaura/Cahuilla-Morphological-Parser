@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors  import CORS, cross_origin
 from logging.config import dictConfig
 from src.services import Services
@@ -22,10 +22,13 @@ dictConfig({
 
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
-cors = CORS(app, resources={r"/parse": {"origins": "http://localhost:5001"}})
+cors = CORS(app, resources={r"/parse": {"origins": "http://localhost:5000"}})
 
 services = Services()
 
+@app.route('/')
+def index():
+    return render_template('cahuilla.html')
 
 @app.route('/')
 def doc() -> str:
