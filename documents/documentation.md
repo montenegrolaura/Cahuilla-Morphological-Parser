@@ -15,6 +15,11 @@ This parser takes in a deverbal noun and returns the definition along with its m
     }
 ]
 ```
+The API can be called directly using a POST request. The endpoint is ```http://localhost:5000/parse```. The POST request must contain a JSON body with the "word" key that you want to parse. For example:
+
+```json
+{"word":"kʷáʔisniʔil̃"}
+```
 
 
 To access this parser, follow the steps below:
