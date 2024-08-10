@@ -18,3 +18,14 @@ class DeverbalNoun:
         return(f"The definition is '{self.definition}'. "
                f"The root verb is '{self.root}' which means '{self.root_gloss}'. This verb is {transitivity_str}. "
                f"The nominalizer is '{self.nominalizer}' which is a {self.nominalizer_gloss} and means '{class1relationship_str}'.")
+
+    def to_dict(self):
+        return{
+            "definition": self.definition,
+            "root": self.root,
+            "root_gloss": self.root_gloss,
+            "transitivity": self.transitivity.name if self.transitivity else None,
+            "nominalizer": self.nominalizer,
+            "nominalizer_gloss": self.nominalizer_gloss,
+            "class1relationship": self.class1relationship.name if self.class1relationship else None
+        }

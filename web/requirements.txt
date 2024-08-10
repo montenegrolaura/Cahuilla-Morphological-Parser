@@ -1,0 +1,5 @@
+pytest
+mysql-connector
+Flask
+httpie
+flask-cors

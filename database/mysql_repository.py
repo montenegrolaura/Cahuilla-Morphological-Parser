@@ -16,11 +16,13 @@ class MysqlRepository(Repository):
             'password': 'rootpassword',
             'host': 'localhost', # to run LOCALLY, this should be localhost
             'port': '3306', # to run LOCALLY, this should be 32000
-            'database': 'cahuilla'
+            'database': 'cahuilla',
+            'auth_plugin': 'mysql_native_password'
         }
         try:
             self.connection = mysql.connector.connect(**config)
             self.cursor = self.connection.cursor()
+            print("Database connection established successfully")
         except Error as e:
             print(f"Error: {e}")
             self.connection = None

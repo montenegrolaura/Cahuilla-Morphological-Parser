@@ -5,7 +5,7 @@ from model.rootVerb import RootVerb
 from model.nominalizer import Nominalizer
 from model.word import Word
 from database.mysql_repository import MysqlRepository
-from app.services import Services
+from src.services import Services
 
 
 @pytest.fixture
