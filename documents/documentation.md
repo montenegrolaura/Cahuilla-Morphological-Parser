@@ -25,17 +25,20 @@ The API can be called directly using a POST request. The endpoint is ```http://l
 To access this parser, follow the steps below:
 
 ### 1. Clone repository
-Once cloned, navigate to Cahuilla-Morphological-Parser directory in your terminal.
+Once cloned, navigate to the web directory in the Cahuilla-Morphological-Parser project in your terminal.
 
-### 2. Install dependencies
-Run the following in the command line:
+### 2. Start Docker
+In the terminal, use ```docker-compose up --build``` to start the Docker container.
+
+### 3. Install dependencies
+In a new terminal in the same directory, run the following in the command line:
 ```pip install --upgrade pip```
 ```pip install -r requirements.txt```
 
-### 3. Run application
-To run the application, run the following line in your terminal: ```python3 -m web.app```
+### 4. Run application
+To run the application, navigate one directory up using ```cd ..``` and run the following line in your terminal: ```python3 -m web.app```
 
-### 4. Send POST request
+### 5. Send POST request
 
 This can be done one of two ways: through a curl command in the terminal or through your browser.
 

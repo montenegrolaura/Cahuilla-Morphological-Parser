@@ -1,8 +1,5 @@
-from typing import Dict
-from database.repository import Repository
+
 from database.mysql_repository import MysqlRepository
-from model.rootVerb import RootVerb
-from model.nominalizer import Nominalizer
 from model.deverbalNoun import DeverbalNoun
 
 class Services:
@@ -16,7 +13,6 @@ class Services:
         roots = self.repository.load_rootVerbs()
         nominalizers = self.repository.load_nominalizers()
         nominalizers.sort(key=lambda x: len(x.canonical_form), reverse=True)
-        #print(nominalizers)
 
         components = DeverbalNoun(definition=definition)
 
