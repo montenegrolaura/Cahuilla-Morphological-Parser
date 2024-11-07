@@ -4,6 +4,7 @@ This parser takes in a Cahuilla noun and extracts the morphological components a
 
 # Example:
 Input noun: kʷáʔisniʔil̃
+
 Output: The definition is 'the writing'. 
         The root verb is 'kʷáʔisni' which means 'to write'. This verb is transitive. 
         The nominalizer is 'ʔil̃' which is a NMLZ.ABST and means 'verbal abstract noun'.
